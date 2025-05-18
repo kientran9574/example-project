@@ -1,14 +1,14 @@
 import nodemailer from "nodemailer";
 import { EmailLog } from "../models/EmailLog.js";
-const EMAIL_USER = "kientran9574@gmail.com";
-const EMAIL_PASS = "sphi yfhk mauu kqyt ";
+import { config } from "dotenv";
+config();
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
-    user: EMAIL_USER,
-    pass: EMAIL_PASS,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 transporter.verify((error, success) => {
@@ -24,7 +24,7 @@ export const sendEmail = async (req, res) => {
   console.log("🚀 ~ sendEmail ~ emailContent:", emailContent);
 
   const mailOptions = {
-    from: EMAIL_USER,
+    from: process.env.EMAIL_USER,
     to: emailRecipient,
     subject: "Workflow Automation Notification",
     text: emailContent,

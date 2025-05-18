@@ -10,9 +10,7 @@ app.use(express.json());
 
 // Kết nối MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://kientran9574:ChrPsU2EDHXjVbeB@cluster0.e8fa3c1.mongodb.net/"
-  )
+  .connect(process.env.MONGO_DB_URL)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
 
